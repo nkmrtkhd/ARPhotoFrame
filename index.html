@@ -10,6 +10,7 @@
 			position: relative;
 			padding: 0;
 			box-sizing: content-box;
+			top: 7em;
 		}
 
 		.canvas_warp:before {
@@ -34,7 +35,10 @@
 
 <body>
 	<button id="startbutton" onclick="takepicture()">Take photo</button>
-
+	<select id="frameOp" onchange="setFrame()">
+		<option value="a">おめで</option>
+		<option value="b">ひかり</option>
+	</select>
 	<div class="canvas-wrap">
 		<canvas id="canvasCamera" class="canvas" width="600" height="300"></canvas>
 		<canvas id="canvasImage" class="canvas" width="600" height="300"></canvas>
@@ -42,6 +46,16 @@
 
 
 	<script>
+		function setFrame() {
+			const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
+			const ctx = board.getContext("2d");
+			const chara = new Image();
+			chara.src = document.getElementById("frameOp").value + ".png";  // 画像のURLを指定
+			ctx.clearRect(0, 0, board.width, board.height)
+			chara.onload = () => {
+				ctx.drawImage(chara, 0, 0);
+			};
+		}
 		function takepicture() {
 
 			var canvas = document.querySelector('#canvasCamera');
@@ -62,14 +76,7 @@
 
 		}
 
-		// canvas準備
-		const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
-		const ctx = board.getContext("2d");
-		const chara = new Image();
-		chara.src = "a.png";  // 画像のURLを指定
-		chara.onload = () => {
-			ctx.drawImage(chara, 0, 0);
-		};
+		setFrame();
 
 
 
