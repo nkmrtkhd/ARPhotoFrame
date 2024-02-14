@@ -46,7 +46,9 @@
 
 			var canvas = document.querySelector('#canvasCamera');
 
-			//const context = canvas.getContext("2d");
+			const context = canvas.getContext("2d");
+			context.drawImage(chara, 0, 0);
+
 			// canvas.width = video.videoWidth;
 			// canvas.height = video.videoHeight;
 			// context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
