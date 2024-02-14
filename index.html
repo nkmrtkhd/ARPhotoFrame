@@ -6,22 +6,34 @@
 </head>
 
 <body>
-	<video id="video"></video>
+	<!-- <video id="video" autoplay muted playsinline></video> -->
+	<canvas id="canvas"></canvas>
+
 	<script>
+		var video = document.createElement('video');
+		video.autoplay = true;
+		video.muted = true;
+		video.playsInline = true;
+		var canvas = document.querySelector('#canvas');
+		navigator.mediaDevices.getUserMedia({
+			video: {
+				facingMode: 'environment'
+			},
+			audio: false
+		})
+			.then(function (stream) {
+				video.srcObject = stream;
+				video.play();
+				setInterval(function () {
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+					var ctx = canvas.getContext('2d');
+					ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
+				}, 200);
+			})
+			.catch(function (e) {
 
-		var video = document.getElementById("video");
-
-		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-		navigator.webkitGetUserMedia({
-			video: true,
-			audio: true
-		}, function (stream) {
-			video.src = URL.createObjectURL(stream);
-			video.play();
-		}, function (error) {
-			console.log(error);
-		});
+			});
 	</script>
 </body>
 
