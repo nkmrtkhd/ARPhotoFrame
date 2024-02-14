@@ -88,27 +88,27 @@
 		video.playsInline = true;
 
 		var canvas = document.querySelector('#canvasCamera');
-		// navigator.mediaDevices.getUserMedia({
-		// 	video: {
-		// 		facingMode: 'environment'
-		// 	},
-		// 	audio: false
-		// })
-		// 	.then(function (stream) {
-		// 		video.srcObject = stream;
-		// 		video.play();
-		// 		setInterval(function () {
-		// 			canvas.width = video.videoWidth;
-		// 			canvas.height = video.videoHeight;
-		// 			var ctx = canvas.getContext('2d');
-		// 			ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
-		// 			ctx.drawImage(chara, 0, 0);
+		navigator.mediaDevices.getUserMedia({
+			video: {
+				facingMode: 'environment'
+			},
+			audio: false
+		})
+			.then(function (stream) {
+				video.srcObject = stream;
+				video.play();
+				setInterval(function () {
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+					var ctx = canvas.getContext('2d');
+					ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
+					ctx.drawImage(chara, 0, 0);
 
-		// 		}, 200);
-		// 	})
-		// 	.catch(function (e) {
+				}, 200);
+			})
+			.catch(function (e) {
 
-		// 	});
+			});
 
 		var video2 = document.createElement('video');
 		video2.autoplay = true;
