@@ -37,15 +37,12 @@
 
 	<div class="canvas-wrap">
 		<canvas id="canvasCamera" class="canvas" width="600" height="300"></canvas>
-		<!-- <canvas id="canvasImage" class="canvas" width="600" height="300"></canvas> -->
+		<canvas id="canvasImage" class="canvas" width="600" height="300"></canvas>
 	</div>
-	<div class="output">
-		<img id="photo" alt="The screen capture will appear in this box." />
-	</div>
+
 
 	<script>
 		function takepicture() {
-			photo = document.getElementById("photo");
 
 			var canvas = document.querySelector('#canvasCamera');
 
@@ -64,13 +61,13 @@
 		}
 
 		// canvas準備
-		// const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
-		// const ctx = board.getContext("2d");
+		const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
+		const ctx = board.getContext("2d");
 		const chara = new Image();
 		chara.src = "a.png";  // 画像のURLを指定
-		// chara.onload = () => {
-		// 	ctx.drawImage(chara, 0, 0);
-		// };
+		chara.onload = () => {
+			ctx.drawImage(chara, 0, 0);
+		};
 
 
 
