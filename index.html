@@ -1,42 +1,27 @@
 <!DOCTYPE html>
-<html xml:lang="ja" lang="ja">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>AR Photo Frame</title>
-</head>
+<html>
 
 <body>
-	<h2>AR Photo Frame</h2>
+	<div id="videoWrap"></div>
+	<script>
+		// 1-i HTMLVideoElementオブジェクトを作成する
+		const video = document.createElement('video');
+		video.autoplay = true;
+		video.width = 360;
+		video.height = 240;
+		// 1-ii video要素をHTMLに追加する
+		document.getElementById('videoWrap').appendChild(video);
 
-	<dl>
-		<dt>写真</dt>
-		<dd>
-			<div>
-				<label><span>背面カメラ</span>
-					<input type="file" capture="environment" accept="image/*"></label>
-			</div>
-
-			<div>
-				<label><span>インカメラ</span>
-					<input type="file" capture="user" accept="image/*"></label>
-			</div>
-		</dd>
-		<dt>動画</dt>
-		<dd>
-			<div>
-				<label><span>背面カメラ</span>
-					<input type="file" capture="environment" accept="video/*"></label>
-			</div>
-
-			<div>
-				<label><span>インカメラ</span>
-					<input type="file" capture="user" accept="video/*"></label>
-			</div>
-		</dd>
-	</dl>
-
+		// 2-i MediaDevicesオブジェクトを用意する
+		const media = navigator.mediaDevices;
+		// 2-ii Webカメラを使っていいかユーザに聞く
+		const constraints = { audio: false, video: true };
+		media.getUserMedia(constraints)
+			// 2-iii 取得できた映像・音声データを処理する
+			.then(function (stream) {
+				video.srcObject = stream;
+			});
+	</script>
 </body>
 
 </html>
