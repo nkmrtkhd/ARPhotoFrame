@@ -29,25 +29,48 @@
 			margin: 0;
 		}
 	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+	<button id="startbutton" onclick="takepicture()">Take photo</button>
+
 	<div class="canvas-wrap">
 		<canvas id="canvasCamera" class="canvas" width="600" height="300"></canvas>
-		<canvas id="canvasImage" class="canvas" width="600" height="300"></canvas>
+		<!-- <canvas id="canvasImage" class="canvas" width="600" height="300"></canvas> -->
+	</div>
+	<div class="output">
+		<img id="photo" alt="The screen capture will appear in this box." />
 	</div>
 
 	<script>
+		function takepicture() {
+			photo = document.getElementById("photo");
 
+			var canvas = document.querySelector('#canvasCamera');
+
+			//const context = canvas.getContext("2d");
+			// canvas.width = video.videoWidth;
+			// canvas.height = video.videoHeight;
+			// context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+
+
+			const a = document.createElement("a");
+			a.href = canvas.toDataURL("image/jpeg");
+			a.download = "image.jpg";
+			a.click();
+
+
+		}
 
 		// canvas準備
-		const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
-		const ctx = board.getContext("2d");
+		// const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
+		// const ctx = board.getContext("2d");
 		const chara = new Image();
 		chara.src = "a.png";  // 画像のURLを指定
-		chara.onload = () => {
-			ctx.drawImage(chara, 0, 0);
-		};
+		// chara.onload = () => {
+		// 	ctx.drawImage(chara, 0, 0);
+		// };
 
 
 
@@ -71,6 +94,8 @@
 					canvas.height = video.videoHeight;
 					var ctx = canvas.getContext('2d');
 					ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
+					ctx.drawImage(chara, 0, 0);
+
 				}, 200);
 			})
 			.catch(function (e) {
