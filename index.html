@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-	<div id="videoWrap"></div>
-	<script>
-		// 1-i HTMLVideoElementオブジェクトを作成する
-		const video = document.createElement('video');
-		video.autoplay = true;
-		video.width = 360;
-		video.height = 240;
-		// 1-ii video要素をHTMLに追加する
-		document.getElementById('videoWrap').appendChild(video);
+<head>
+	<title>Webカメラ</title>
+</head>
 
-		// 2-i MediaDevicesオブジェクトを用意する
-		const media = navigator.mediaDevices;
-		// 2-ii Webカメラを使っていいかユーザに聞く
-		const constraints = { audio: false, video: true };
-		media.getUserMedia(constraints)
-			// 2-iii 取得できた映像・音声データを処理する
-			.then(function (stream) {
-				video.srcObject = stream;
-			});
+<body>
+	<video id="video"></video>
+	<script>
+
+		var video = document.getElementById("video");
+
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+		navigator.webkitGetUserMedia({
+			video: true,
+			audio: true
+		}, function (stream) {
+			video.src = URL.createObjectURL(stream);
+			video.play();
+		}, function (error) {
+			console.log(error);
+		});
 	</script>
 </body>
 
