@@ -3,18 +3,60 @@
 
 <head>
 	<title>Webカメラ</title>
+	<style type="text/css">
+		.canvas-wrap {
+			width: 600px;
+			max-width: 100%;
+			position: relative;
+			padding: 0;
+			box-sizing: content-box;
+		}
+
+		.canvas_warp:before {
+			content: "";
+			display: block;
+			padding-top: 50%;
+		}
+
+		.canvas {
+			position: absolute;
+			left: 0;
+			top: 0;
+			border: 0;
+			max-width: 100%;
+			box-sizing: content-box;
+			padding: 0;
+			margin: 0;
+		}
+	</style>
 </head>
 
 <body>
-	<!-- <video id="video" autoplay muted playsinline></video> -->
-	<canvas id="canvas"></canvas>
+	<div class="canvas-wrap">
+		<canvas id="canvasCamera" class="canvas" width="600" height="300"></canvas>
+		<canvas id="canvasImage" class="canvas" width="600" height="300"></canvas>
+	</div>
 
 	<script>
+
+
+		// canvas準備
+		const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
+		const ctx = board.getContext("2d");
+		const chara = new Image();
+		chara.src = "a.png";  // 画像のURLを指定
+		chara.onload = () => {
+			ctx.drawImage(chara, 0, 0);
+		};
+
+
+
 		var video = document.createElement('video');
 		video.autoplay = true;
 		video.muted = true;
 		video.playsInline = true;
-		var canvas = document.querySelector('#canvas');
+
+		var canvas = document.querySelector('#canvasCamera');
 		navigator.mediaDevices.getUserMedia({
 			video: {
 				facingMode: 'environment'
