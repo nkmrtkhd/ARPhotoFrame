@@ -10,6 +10,7 @@
 			position: relative;
 			padding: 0;
 			box-sizing: content-box;
+			top: 3em;
 		}
 
 		.canvas_warp:before {
@@ -39,11 +40,18 @@
 		<canvas id="canvasCamera" class="canvas" width="600" height="300"></canvas>
 		<!-- <canvas id="canvasImage" class="canvas" width="600" height="300"></canvas> -->
 	</div>
-	<div class="output">
-		<img id="photo" alt="The screen capture will appear in this box." />
-	</div>
+
+	<select name="pets" id="myframe" onchange="reloadFrame()">
+		<option value="a">卒業おめでとう</option>
+		<option value="b">ひかり</option>
+	</select>
+
+	<a href="https://jimokuji.netlify.app/">甚目寺</a>
 
 	<script>
+		function reloadFrame() {
+			chara.src = document.getElementById("myframe").value + ".png";
+		}
 		function takepicture() {
 			photo = document.getElementById("photo");
 
@@ -67,7 +75,7 @@
 		// const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
 		// const ctx = board.getContext("2d");
 		const chara = new Image();
-		chara.src = "a.png";  // 画像のURLを指定
+		chara.src = document.getElementById("myframe").value + ".png";
 		// chara.onload = () => {
 		// 	ctx.drawImage(chara, 0, 0);
 		// };
