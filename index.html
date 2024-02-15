@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Webカメラ</title>
+	<title>ARフォトフレーム(中村屋)</title>
 	<style type="text/css">
 		.canvas-wrap {
 			width: 600px;
@@ -46,10 +46,10 @@
 
 
 	<script>
+		const chara = new Image();
 		function setFrame() {
 			const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
 			const ctx = board.getContext("2d");
-			const chara = new Image();
 			chara.src = document.getElementById("frameOp").value + ".png";  // 画像のURLを指定
 			ctx.clearRect(0, 0, board.width, board.height)
 			chara.onload = () => {
