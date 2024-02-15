@@ -5,8 +5,6 @@
 	<title>ARフォトフレーム(中村屋)</title>
 	<style type="text/css">
 		.canvas-wrap {
-			width: 600px;
-			max-width: 100%;
 			position: relative;
 			padding: 0;
 			box-sizing: content-box;
@@ -40,8 +38,8 @@
 		<option value="b">ひかり</option>
 	</select>
 	<div class="canvas-wrap">
-		<canvas id="canvasCamera" class="canvas" width="600" height="300"></canvas>
-		<canvas id="canvasImage" class="canvas" width="600" height="300"></canvas>
+		<canvas id="canvasCamera" class="canvas" width="750px" height="1334px"></canvas>
+		<canvas id="canvasImage" class="canvas" width="750px" height="1334px"></canvas>
 	</div>
 
 
@@ -67,10 +65,22 @@
 			// canvas.height = video.videoHeight;
 			// context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
 
-
+			const yyyymmdd = new Intl.DateTimeFormat(
+				undefined,
+				{
+					year: 'numeric',
+					month: '2-digit',
+					day: '2-digit',
+					hour: '2-digit',
+					minute: '2-digit',
+					second: '2-digit',
+					fractionalSecondDigits: 3,
+				}
+			)
+			let fname = yyyymmdd.format(new Date()).replaceAll("/", "").replaceAll(":", "");
 			const a = document.createElement("a");
 			a.href = canvas.toDataURL("image/jpeg");
-			a.download = "image.jpg";
+			a.download = fname + ".jpg";
 			a.click();
 
 
