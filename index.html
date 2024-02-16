@@ -44,14 +44,14 @@
 
 
 	<script>
-		const chara = new Image();
+		const imgFrame = new Image();
 		function setFrame() {
 			const board = document.querySelector("#canvasImage");  //getElementById()等でも可。オブジェクトが取れれば良い。
 			const ctx = board.getContext("2d");
-			chara.src = document.getElementById("frameOp").value + ".png";  // 画像のURLを指定
+			imgFrame.src = document.getElementById("frameOp").value + ".png";  // 画像のURLを指定
 			ctx.clearRect(0, 0, board.width, board.height)
-			chara.onload = () => {
-				ctx.drawImage(chara, 0, 0);
+			imgFrame.onload = () => {
+				ctx.drawImage(imgFrame, 0, 0);
 			};
 		}
 		function takepicture() {
@@ -59,7 +59,7 @@
 			var canvas = document.querySelector('#canvasCamera');
 
 			const context = canvas.getContext("2d");
-			context.drawImage(chara, 0, 0);
+			context.drawImage(imgFrame, 0, 0);
 
 			// canvas.width = video.videoWidth;
 			// canvas.height = video.videoHeight;
@@ -108,9 +108,11 @@
 				setInterval(function () {
 					canvas.width = video.videoWidth;
 					canvas.height = video.videoHeight;
+					canvas.width = imgFrame.width;
+					canvas.height = imgFrame.height;
 					var ctx = canvas.getContext('2d');
-					ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height);
-					//ctx.drawImage(chara, 0, 0);
+					ctx.drawImage(video, 0, 0, imgFrame.width, imgFrame.height, 0, 0, canvas.width, canvas.height);
+					//ctx.drawImage(imgFrame, 0, 0);
 
 				}, 200);
 			})
